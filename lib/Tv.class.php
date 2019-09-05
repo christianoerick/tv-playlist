@@ -234,7 +234,7 @@ class Tv
           $nome = (in_array($grupo_chave, [ 'radios', 'shows', 'documentarios' ]))?'listagem':$nome;
           $nome_chave = $this->limpa($nome);
     
-          if (!array_key_exists($grupo_chave, $lista))
+          if (!$this->exists($grupo_chave, $lista))
           {
             $lista[$grupo_chave] = [
               'nome' => $grupo,
@@ -242,7 +242,7 @@ class Tv
             ];
           }
           
-          if (!array_key_exists($nome_chave, $lista[$grupo_chave]['lista']))
+          if (!$this->exists($nome_chave, $lista[$grupo_chave]['lista']))
           {
             $temporada = null;
             $lista[$grupo_chave]['lista'][$nome_chave] = [
@@ -265,13 +265,13 @@ class Tv
               $dados['tvg-name'] = $episodio;
               $temporada = trim($temporada);
               
-              if (array_key_exists('lista', $lista[$grupo_chave]['lista'][$nome_chave]))
+              if ($this->exists('lista', $lista[$grupo_chave]['lista'][$nome_chave]))
               {
                 unset($lista[$grupo_chave]['lista'][$nome_chave]['lista']);
                 $lista[$grupo_chave]['lista'][$nome_chave]['temporadas'] = [];
               }
               
-              if (!array_key_exists($temporada, $lista[$grupo_chave]['lista'][$nome_chave]['temporadas']))
+              if (!$this->exists($temporada, $lista[$grupo_chave]['lista'][$nome_chave]['temporadas']))
               {
                 $lista[$grupo_chave]['lista'][$nome_chave]['temporadas'][$temporada] = [
                   'nome' => $temporada,
@@ -291,7 +291,7 @@ class Tv
             $contador = $lista[$grupo_chave]['lista'][$nome_chave]['temporadas'][$temporada]['contador'];
             $lista[$grupo_chave]['lista'][$nome_chave]['temporadas'][$temporada]['episodios'][$contador] = $dados;
             $lista[$grupo_chave]['lista'][$nome_chave]['temporadas'][$temporada]['contador']++;
-            if (array_key_exists('tvg-logo', $dados) && $dados['tvg-logo'] && !$lista[$grupo_chave]['lista'][$nome_chave]['imagem'])
+            if ($this->exists('tvg-logo', $dados) && $dados['tvg-logo'] && !$lista[$grupo_chave]['lista'][$nome_chave]['imagem'])
             {
               $lista[$grupo_chave]['lista'][$nome_chave]['imagem'] = $dados['tvg-logo'];
             }
@@ -301,7 +301,7 @@ class Tv
             $contador = $lista[$grupo_chave]['lista'][$nome_chave]['contador'];
             $lista[$grupo_chave]['lista'][$nome_chave]['lista'][$contador] = $dados;
             $lista[$grupo_chave]['lista'][$nome_chave]['contador']++;
-            if (array_key_exists('tvg-logo', $dados) && $dados['tvg-logo'] && !$lista[$grupo_chave]['lista'][$nome_chave]['imagem'] && $grupo_chave != 'filmes')
+            if ($this->exists('tvg-logo', $dados) && $dados['tvg-logo'] && !$lista[$grupo_chave]['lista'][$nome_chave]['imagem'] && $grupo_chave != 'filmes')
             {
               $lista[$grupo_chave]['lista'][$nome_chave]['imagem'] = $dados['tvg-logo'];
             }
