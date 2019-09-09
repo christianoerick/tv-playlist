@@ -1,6 +1,8 @@
 <?php
 class Tv
 {
+  protected $vlc = true;
+  
   protected $menu = [];
   
   protected $prefixo = '';
@@ -11,7 +13,24 @@ class Tv
   
   public function getLink($complemento, $item)
   {
-    return $this->get('link', $this->prefixo.$complemento, $item);
+    if ($this->vlc)
+    {
+      $retorno = $this->get('link', null, $item);
+      if ($retorno)
+      {
+        $retorno = 'http://:12345@10.0.0.10:8080/requests/status.xml?command=in_play&input='.$retorno.'&name='.$item['nome'].'" target="iframe" class="js_vlc';
+      }
+      else
+      {
+        $retorno = $this->prefixo.$complemento;
+      }
+    }
+    else
+    {
+      $retorno = $this->get('link', $this->prefixo.$complemento, $item);
+    }
+    
+    return $retorno;
   }
   
   public function getMenu()

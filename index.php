@@ -13,7 +13,7 @@ $lista = $tv->lista('arquivos/lista.json');
   <meta name="author" content="@christianoerick">
   <title>TV</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style type="text/css">.jumbotron {padding-top: 3rem;padding-bottom: 3rem;margin-bottom: 0;background-color: #fff;}@media (min-width: 768px) {.jumbotron {padding-top: 3rem;padding-bottom: 3rem;}}.jumbotron p:last-child {margin-bottom: 0;}.jumbotron-heading {font-weight: 300;}.jumbotron .container {max-width: 40rem;}footer {padding-top: 3rem;padding-bottom: 3rem;}footer p {margin-bottom: .25rem;}.bd-placeholder-img {font-size: 1.125rem;text-anchor: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}@media (min-width: 768px) {.bd-placeholder-img-lg {font-size: 3.5rem;}}</style>
+  <style type="text/css">.jumbotron {padding-top: 3rem;padding-bottom: 3rem;margin-bottom: 0;background-color: #fff;}@media (min-width: 768px) {.jumbotron {padding-top: 3rem;padding-bottom: 3rem;}}.jumbotron p:last-child {margin-bottom: 0;}.jumbotron-heading {font-weight: 300;}.jumbotron .container {max-width: 40rem;}footer {padding-top: 3rem;padding-bottom: 3rem;}footer p {margin-bottom: .25rem;}.bd-placeholder-img {font-size: 1.125rem;text-anchor: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}@media (min-width: 768px) {.bd-placeholder-img-lg {font-size: 3.5rem;}}iframe{display:none}</style>
 </head>
 <body>
 <header>
@@ -42,7 +42,7 @@ $lista = $tv->lista('arquivos/lista.json');
 <?php foreach ($lista['data'] as $modulo => $item) { ?>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <a<?php echo (array_key_exists('link', $item))?' Content-Disposition: filename="'.$item['link'].'"':''; ?> href="<?php echo $tv->getLink($modulo, $item); ?>" style="text-decoration:none!important">
+            <a href="<?php echo $tv->getLink($modulo, $item); ?>" style="text-decoration:none!important">
 <?php if (array_key_exists('imagem', $item) && $item['imagem']) { ?>
               <figure style="background:#000;margin:0;padding:20px 0"><img src="<?php echo $item['imagem']; ?>" style="height:160px;max-width:100%;display:block;margin:0 auto"><figcaption style="color:#fff;text-align:center;"><?php echo $item['nome']; ?></figcaption></figure>
 <?php } else { ?>
@@ -62,8 +62,15 @@ $lista = $tv->lista('arquivos/lista.json');
     <p>By @christianoerick</p>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<iframe name="iframe"></iframe>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+  $('.js_vlc').on('click', function(){
+  });
+});
+</script>
 </body>
 </html>
