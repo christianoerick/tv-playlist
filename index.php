@@ -66,39 +66,35 @@ $lista = $tv->lista('arquivos/lista.json');
   </section>
   <div class="album py-5 bg-light">
     <div class="container" id="items">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="filter-group row">
-            <div class="form-group col-12">
-              <input type="text" class="search form-control" placeholder="Busca...">
-            </div>
-          </div>
-          <ul class="list row">
+      <div class="filter-group row">
+        <div class="form-group col-12">
+          <input type="text" class="search form-control" placeholder="Busca...">
+        </div>
+      </div>
+      <ul class="list row">
 <?php if ($lista['status']) { ?>
 <?php foreach ($lista['data'] as $modulo => $item) { if(trim($item['nome']) !== "") { ?>
-          <li class="list--list-item col-12 col-sm-6 col-md-4 col-xl-3">
-            <a href="<?php echo $tv->getLink($modulo, $item); ?>">
+      <li class="list--list-item col-12 col-sm-6 col-md-4 col-xl-3">
+        <a href="<?php echo $tv->getLink($modulo, $item); ?>">
 <?php if (array_key_exists('imagem', $item) && $item['imagem']) { ?>
-              <figure style="background:#000;padding:20px 0;">
-                <img src="<?php echo $item['imagem']; ?>" style="height:160px;max-width:100%;display:block;margin:0 auto">
-                <figcaption style="color:#fff;text-align:center;" class="title"><?php echo $item['nome'];?></figcaption>
-              </figure>
+          <figure style="background:#000;padding:20px 0;">
+            <img src="<?php echo $item['imagem']; ?>" style="height:160px;max-width:100%;display:block;margin:0 auto">
+            <figcaption style="color:#fff;text-align:center;" class="title"><?php echo $item['nome'];?></figcaption>
+          </figure>
 <?php } else { ?>
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                <title class="title"><?php echo $item['nome']; ?></title>
-                <rect width="100%" height="100%" fill="#000"/>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em"><?php echo $item['nome']; ?></text>
-              </svg>
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <title class="title"><?php echo $item['nome']; ?></title>
+            <rect width="100%" height="100%" fill="#000"/>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em"><?php echo $item['nome']; ?></text>
+          </svg>
 <?php } ?>
-            </a>
-          </li>
+        </a>
+      </li>
 <?php }} ?>
 <?php } ?>
-        </ul>
-        <div class="no-result">Sem resultados</div>
-        <ul class="pagination float-right"></ul>
-      </div>
-    </div>
+    </ul>
+    <div class="no-result">Sem resultados</div>
+    <ul class="pagination float-right"></ul>
   </div>
   </div>
 </main>
@@ -122,7 +118,7 @@ $(document).ready(function(){
     if (list.matchingItems.length > 0) {
       $('.no-result').hide()
     } else {
-      $('.no-result').show()
+      $('.no-result').show();
     }
   });
 });
