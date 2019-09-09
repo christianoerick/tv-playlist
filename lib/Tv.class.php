@@ -3,6 +3,8 @@ class Tv
 {
   protected $vlc = true;
   
+  protected $vlc_server = '127.0.0.1';
+  
   protected $menu = [];
   
   protected $prefixo = '';
@@ -18,7 +20,7 @@ class Tv
       $retorno = $this->get('link', null, $item);
       if ($retorno)
       {
-        $retorno = 'http://:12345@10.0.0.10:8080/requests/status.xml?command=in_play&input='.$retorno.'&name='.$item['nome'].'" target="iframe" class="js_vlc';
+        $retorno = 'http://:12345@'.$this->vlc_server.':8080/requests/status.xml?command=in_play&input='.$retorno.'&name='.$item['nome'].'" target="iframe" class="js_vlc';
       }
       else
       {
