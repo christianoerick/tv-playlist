@@ -4,6 +4,8 @@ class Tv
   protected $vlc = true;
   
   protected $vlc_server = '127.0.0.1';
+  protected $vlc_port = '8080';
+  protected $vlc_pass = '12345';
   
   protected $menu = [];
   
@@ -12,6 +14,7 @@ class Tv
   protected $titulo = '';
   
   protected $modulo = '';
+  protected $search = '';
   
   public function getLink($complemento, $item)
   {
@@ -20,7 +23,7 @@ class Tv
       $retorno = $this->get('link', null, $item);
       if ($retorno)
       {
-        $retorno = 'http://:12345@'.$this->vlc_server.':8080/requests/status.xml?command=in_play&input='.$retorno.'&name='.$item['nome'].'" target="iframe" class="js_vlc';
+        $retorno = 'http://:'.$this->vlc_pass.'@'.$this->vlc_server.':'.$this->vlc_port.'/requests/status.xml?command=in_play&input='.$retorno.'&name='.$item['nome'].'" target="iframe" class="js_vlc';
       }
       else
       {
@@ -49,6 +52,13 @@ class Tv
   {
     return $this->modulo;
   }
+
+  public function setVLCServer($ip=NULL, $port=NULL, $pass=NULL)
+  {
+    if($ip) $this->vlc_server = $ip;
+    if($port) $this->vlc_port = $port;
+    if($pass) $this->vlc_pass = $pass;
+  }
   
   public function lista($arquivo_json)
   {
@@ -59,6 +69,7 @@ class Tv
     if (!file_exists($arquivo_json))
     {
       $retorno['message'] = 'Arquivo (json) não existe';
+      $lista = [];
     }
     else
     {
@@ -72,6 +83,7 @@ class Tv
     }
     
     $this->modulo = $this->get('modulo');
+    $this->search = $this->get('search', '');
     
     if ($this->modulo && $this->exists($this->modulo, $lista))
     {
